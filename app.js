@@ -7,6 +7,10 @@ var express = require('express'),
     seedDB = require('./seeds');
     app = express();
 
+var businessRoutes = require('./routes/business'),
+    sportsRoutes = require('./routes/sports'),
+    techRoutes = require('./routes/technology');
+
 mongoose.connect('mongodb://localhost/news_website', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
@@ -14,8 +18,6 @@ mongoose.connect('mongodb://localhost/news_website', {
     useCreateIndex:true
 });
 
-// seedDB.del();
-// seedDB.add();
 // setInterval(refresh,1000 * 60 * 60);
 
 app.set('view engine','ejs');
@@ -46,37 +48,10 @@ app.get('/latest',function(req,res){
     });
 });
 
-app.get('/business',function(req,res){
-    News.find({category:'business'}).limit(15).exec(function(err,articles){
-        if(err){
-            console.log(err);
-        }else{
-            res.render('business',{articles:articles});
-        }
-    });
-});
 
-app.get('/sports',function(req,res){
-    News.find({category:'sports'}).limit(15).exec(function(err,articles){
-        if(err){
-            console.log(err);
-        }else{
-            res.render('business',{articles:articles});
-        }
-    });
-});
-
-app.get('/technology',function(req,res){
-    News.find({$or : [{category:'technology'},{category:'science'}]}).limit(15).exec(function(err,articles){
-        if(err){
-            console.log(err);
-        }else{
-            res.render('business',{articles:articles});
-        }
-    });
-});
-
-    
+app.use('/business',businessRoutes);
+app.use('/sports',sportsRoutes);
+app.use('/technology',techRoutes);
 
 app.listen(5000,function(){
     
