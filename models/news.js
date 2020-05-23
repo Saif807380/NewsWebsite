@@ -4,7 +4,6 @@ var newsSchema = mongoose.Schema({
     key: {
         title:String,
         content:String,
-        image_url:String
     },
     source: String,
     author: String,
@@ -14,10 +13,7 @@ var newsSchema = mongoose.Schema({
     },
     description: String,
     article_url: String,
-    image_url: {
-        type: String,
-        unique: false
-    },
+    image_url: String,
     published_at: String,
     content: {
         type:String,

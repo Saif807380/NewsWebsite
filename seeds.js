@@ -3,6 +3,17 @@ const newsapi = new NewsAPI('08962c411ff94e7b85fed6959f1ed1e4');
 var News = require('./models/news');
 
 categories = ['business','entertainment','general','health','science','sports','technology'];
+countries = ['us','in','gb','au','nz','ca'];
+
+default_images = {
+    business: "https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Falejandrocremades%2Ffiles%2F2018%2F12%2Fbusiness-3605367_1920-1200x741.jpg",
+    entertainment:"https://www.forbesindia.com/media/images/2019/Oct/img_122803_media_and_entertainment.jpg",
+    general:"https://spiritanroma.org/wp-content/uploads/2018/01/world-news.jpg",
+    health:"https://patientengagementhit.com/images/site/article_headers/_normal/GettyImages-CommunityHealth.jpg",
+    science:"https://image.freepik.com/free-vector/hand-drawn-science-education-background_23-2148499326.jpg",
+    sports: "https://files.northernbeaches.nsw.gov.au/sites/default/files/styles/gi--main-thumbnail/public/images/general-information/sports-associations/sports-associations.jpg?itok=BGgsVt7w",
+    technology:"https://forwardthinkingpt.com/wp-content/uploads/2018/11/Physiofusion-1024x819-2-950x760.jpg"
+}
 
 function del(){
     News.deleteMany({},function(err){
@@ -13,25 +24,24 @@ function del(){
     });
 }
 
-function add(){
+function add(country){
     categories.forEach(function(c){
         newsapi.v2.topHeadlines({
             category: c,
             language: 'en',
-            country: 'us'
+            country: country
         }).then(data=>{
             data.articles.forEach(function(article){
-                if(article.title && article.content && article.urlToImage){
+                if(article.title && article.content){
                     obj = {
                         key:{
                             title: article.title,
                             content: article.content,
-                            image_url: article.urlToImage
                         },
                         title: article.title,
                         content: article.content,
                         category: c,
-                        image_url: article.urlToImage
+                        image_url: default_images[c]
                     };
                     if(article.source.name){
                         obj.source = article.source.name;
@@ -44,6 +54,9 @@ function add(){
                     }
                     if(article.url){
                         obj.article_url=article.url;
+                    }
+                    if(article.urlToImage){
+                        obj.image_url = article.urlToImage;
                     }
                     if(article.publishedAt){
                         var week = ['Sun','Mon','Tues','Wed','Thur','Fri','Sat'];
@@ -61,35 +74,12 @@ function add(){
     });
 }
 
-module.exports = {del:del,add:add}
+function addAll(){
+    countries.forEach(function(country){
+        add(country);
+    });
+}
 
 
-// var request = require('request'),
-//     News = require('./models/news'),
 
-
-
-// var url = "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=08962c411ff94e7b85fed6959f1ed1e4";
-
-// request(url,function(err,response,body){
-//     var data = JSON.parse(body);
-//     data.articles.forEach(function(article){
-//         News.create({
-//             source: article.source.name,
-//             author: article.author,
-//             title: article.title,
-//             description: article.description,
-//             article_url: article.url,
-//             image_url: article.urlToImage,
-//             published_at: article.publishedAt,
-//             content: article.content,
-//             category: "business"
-//         },function(err,article){
-//             if(err){
-//                 console.log(err);
-//             }
-//         });
-//     });
-//     console.log("Done");
-// });
-
+module.exports = {del:del,add:addAll}
