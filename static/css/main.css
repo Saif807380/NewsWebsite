@@ -1,0 +1,12 @@
+.embed-responsive .card-img-top {
+    object-fit: fill;
+}
+
+#lead-container{
+    height: 20em;
+}
+
+#lead-card{
+    height: 100%;
+}
+
