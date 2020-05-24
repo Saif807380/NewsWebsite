@@ -1,8 +1,9 @@
 var express = require('express'),
     router = express.Router(),
+    middleWare = require('../middleware/index'),
     News = require('../models/news');
 
-router.get('/',function(req,res){
+router.get('/',middleWare.isLoggedIn,function(req,res){
     News.find({$or : [{category:'technology'},{category:'science'}]}).exec(function(err,articles){
         if(err){
             console.log(err);

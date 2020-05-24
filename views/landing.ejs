@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>News Website</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/main.css">
+    </head>
+    <body>
+        <main>
+            <section class="container-fluid px-0" id="header-section">
+                <nav class="navbar navbar-expand-md navbar-dark">
+                    <a class="navbar-brand" href="/">Some cool name</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav ml-auto">
+                        <% if(currentUser){ %> 
+                            <li class="nav-item ">
+                                <a class="nav-link text-white" href="/latest">Latest</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/business">Business</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/technology">Technology</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/health">Health</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/sports">Sports</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/logout">Logout</a>
+                            </li>
+                        <% }else{ %>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="/register">Sign Up</a>
+                            </li>
+                        <% } %> 
+                      </ul>
+                      
+                    </div>
+                </nav>
+                <div class="container">
+                    <% if(error && error.length>0) {%>
+                      <div class="alert alert-danger" role="alert">
+                        <%= error %> 
+                      </div> 
+                    <% } %> 
+                    <% if(success && success.length>0) {%>
+                      <div class="alert alert-success" role="alert">
+                        <%= success %> 
+                      </div> 
+                    <% } %> 
+                <div class="jumbotron mb-0" style="text-align:center; background:none ;border-radius: 0;">
+                    <div>
+                        <h1 class="display-3 text-white">News Website</h1>
+                        <blockquote class="blockquote mt-5 text-white">
+                            <p class="h3">In case of news, we should always wait for the sacrament of confirmation</p>
+                            <footer class="blockquote-footer text-white"><cite title="Voltaire">Voltaire</cite></footer>
+                        </blockquote>
+                        <p class="text-white mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam reiciendis nobis fugit, repudiandae natus totam amet eos. Cupiditate quaerat saepe itaque id! Error tempore odio nihil dolores cupiditate fuga reiciendis ab cumque qui? Ipsa architecto asperiores, possimus, soluta odio, necessitatibus illo dolorem optio hic vero fugiat! Perferendis corrupti dignissimos facere sint in voluptas alias atque vero quaerat, doloribus quod officiis autem sit rem recusandae? Quo placeat aperiam unde illum, aliquid at repudiandae veritatis esse! Eius ut possimus voluptate quia officia asperiores facilis voluptatem suscipit itaque molestias quo recusandae earum, amet reiciendis rem est in cupiditate vero sequi. Enim, autem neque.</p>
+                        <a href="/register" class="btn btn-outline-light btn-lg mt-5">Sign Up</a>
+                    </div>
+                </div>
+            </section>
+            <section class="container-fluid px-0 ">
+                <div class="row align-items-center mr-0">
+                    <div class="col-md-6 order-2 order-md-1 pr-0">
+                        <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1510&q=80" 
+                        alt="Business Image" class="img-fluid">
+                    </div>
+                    <div class="col-md-6 px-0 order-1 order-md-2">
+                        <div class="row justify-content-center align-items-center mr-0">
+                            <div class="col-md-10 col-lg-8 text-center">
+                                <h2 class="display-4 mb-4">Business</h2>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ab veniam officiis? Beatae eveniet temporibus excepturi atque, quidem sequi quo incidunt facilis. Qui, minus quaerat! A officia magnam harum nobis voluptas ducimus facilis autem qui?
+                                </p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="container-fluid px-0">
+                <div class="row align-items-center mr-0">
+                    <div class="col-md-6 pl-0">
+                        <div class="row justify-content-center align-items-center" >
+                            <div class="col-md-10 col-lg-8 text-center">
+                                <h2 class="display-4 mb-4">Technology</h2>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ab veniam officiis? Beatae eveniet temporibus excepturi atque, quidem sequi quo incidunt facilis. Qui, minus quaerat! A officia magnam harum nobis voluptas ducimus facilis autem qui?
+                                </p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-0">
+                        <img src="https://images.unsplash.com/photo-1496065187959-7f07b8353c55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" 
+                        alt="Business Image" class="img-fluid">
+                    </div>
+                </div>
+            </section>
+            <section class="container-fluid px-0">
+                <div class="row align-items-center mr-0">
+                    <div class="col-md-6 order-2 order-md-1 pr-0">
+                        <img src="https://images.unsplash.com/photo-1549890762-0a3f8933bc76?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1735&q=80" 
+                        alt="Business Image" class="img-fluid">
+                    </div>
+                    <div class="col-md-6 px-0 order-1 order-md-2">
+                        <div class="row justify-content-center align-items-center mr-0" >
+                            <div class="col-md-10 col-lg-8 text-center">
+                                <h2 class="display-4 mb-4">Health</h2>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ab veniam officiis? Beatae eveniet temporibus excepturi atque, quidem sequi quo incidunt facilis. Qui, minus quaerat! A officia magnam harum nobis voluptas ducimus facilis autem qui?
+                                </p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="container-fluid px-0">
+                <div class="row align-items-center mr-0">
+                    <div class="col-md-6">
+                        <div class="row justify-content-center align-items-center" >
+                            <div class="col-md-10 col-lg-8 text-center">
+                                <h2 class="display-4 mb-4">Sports</h2>
+                                <p class="lead">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad ab veniam officiis? Beatae eveniet temporibus excepturi atque, quidem sequi quo incidunt facilis. Qui, minus quaerat! A officia magnam harum nobis voluptas ducimus facilis autem qui?
+                                </p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 px-0">
+                        <img src="https://images.unsplash.com/photo-1471295253337-3ceaaedca402?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1496&q=80" 
+                        alt="Business Image" class="img-fluid">
+                    </div>
+                </div>
+            </section>
+
+
+<%- include('./partials/footer'); %> 

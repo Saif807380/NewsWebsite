@@ -1,16 +1,18 @@
 var express = require('express'),
-    request = require('request'),
-    weather = require('openweather-apis'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    News = require('./models/news'),
-    seedDB = require('./seeds');
+    seedDB = require('./seeds'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local'),
+    User = require('./models/user'),
+    flash = require('connect-flash'),
     app = express();
 
 var businessRoutes = require('./routes/business'),
     sportsRoutes = require('./routes/sports'),
     techRoutes = require('./routes/technology'),
-    healthRoutes = require('./routes/health');
+    healthRoutes = require('./routes/health'),
+    indexRoutes = require('./routes/index');
 
 mongoose.connect('mongodb://localhost/news_website', { 
     useNewUrlParser: true, 
@@ -26,39 +28,32 @@ mongoose.connect('mongodb://localhost/news_website', {
 app.set('view engine','ejs');
 app.use(express.static(__dirname + '/static'));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(flash());
 
-weather.setLang('en');
-weather.setUnits('metric');
-weather.setAPPID("67ff1f98098d181b8fa98a0d79da18e4");
+app.use(require('express-session')({
+    secret:"News Website",
+    resave: false,
+    saveUninitialized: false
+}));
 
-app.get('/',function(req,res){
-    res.send("hello");
-})
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-app.get('/latest',function(req,res){
-    request("https://ipinfo.io?token=9d34b9ef3cc10f",function(err,response,body){
-        var data = JSON.parse(body);
-        weather.setCity(data.city);
-        weather.getAllWeather(function(err, data){
-            obj = {};
-            obj.main = data.main;
-            obj.description = data.weather[0].description;
-            News.find({}).limit(16).exec(function(err,articles){
-                if(err){
-                    console.log(err);
-                }else{
-                    res.render('latest',{weather:obj, articles:articles});
-                }
-            });
-        });
-    });
+app.use(function(req,res,next){
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash('error');
+    res.locals.success = req.flash('success');
+    next(); 
 });
-
 
 app.use('/business',businessRoutes);
 app.use('/sports',sportsRoutes);
 app.use('/technology',techRoutes);
 app.use('/health',healthRoutes);
+app.use('/',indexRoutes)
 
 app.listen(5000,function(){
     
