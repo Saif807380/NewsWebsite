@@ -2,23 +2,24 @@
 
 <div class="container-fluid mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-2">
+        <div class="col-md-3 col-xl-2 d-none d-md-block">
             <div class="card">
                 <ul class="list-group list-group-flush">
                     <li class="lead list-group-item bg-dark text-white">Current Weather</li>
-                    <li class="list-group-item">Temperature: <%= weather.temp %></li>
-                    <li class="list-group-item">Humidity: <%= weather.humidity %></li>
-                    <li class="list-group-item">Pressure: <%= weather.pressure %></li>
+                    <li class="list-group-item">Temperature: <%= weather.main.temp %>°C</li>
+                    <li class="list-group-item">Humidity: <%= weather.main.humidity %>%</li>
+                    <li class="list-group-item">Pressure: <%= weather.main.pressure %> hPa</li>
+                    <li class="list-group-item">Description: <%= weather.description %></li>
                 </ul>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8 col-xl-9">
             <div class="row">
-                <div class="col-12" id="lead-container">
-                    <div class="card" id="lead-card">
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <img alt="Card image cap" class="card-img-top embed-responsive-item" 
-                            src="https://images.unsplash.com/photo-1532339142463-fd0a8979791a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80" />
+                <div class="col-12 d-none d-md-block " >
+                    <div class="card">
+                        <div class="embed-responsive" id="embed-container">
+                            <img alt="Card image cap" class="card-img-top embed-responsive-item img-fluid" 
+                            src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Falejandrocremades%2Ffiles%2F2018%2F12%2Fbusiness-3605367_1920-1200x741.jpg" />
                          </div>
                         <div class="card-img-overlay">
                             <h4 class="text-light">
@@ -28,7 +29,7 @@
                     </div>
                 </div>
                 <% articles.forEach(function(article){ %>
-                    <div class="col-md-3 my-3 align-items-stretch">
+                    <div class="col-sm-6 col-md-4 col-xl-3 my-3 align-items-stretch">
                         <div class="card h-100">
                             <img src="<%= article.image_url %> " alt="" class="card-img-top">
                             <div class="card-body">

@@ -26,3 +26,15 @@
     overflow: hidden;
     position: relative;
 }
+
+@media screen and (min-width: 768px) {
+    #embed-container{
+        height: 300px;
+    }
+}
+
+@media screen and (min-width: 1150px){
+    #embed-container{
+        height: 400px;
+    }
+}

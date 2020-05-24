@@ -4,7 +4,7 @@ var express = require('express'),
 
 
 router.get('/',function(req,res){
-    News.find({category:'sports'}).exec(function(err,articles){
+    News.find({category:'health'}).exec(function(err,articles){
         if(err){
             console.log(err);
         }else{
@@ -31,4 +31,5 @@ function shuffle(array) {
   
     return array;
   }
+
 module.exports = router;

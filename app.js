@@ -9,7 +9,8 @@ var express = require('express'),
 
 var businessRoutes = require('./routes/business'),
     sportsRoutes = require('./routes/sports'),
-    techRoutes = require('./routes/technology');
+    techRoutes = require('./routes/technology'),
+    healthRoutes = require('./routes/health');
 
 mongoose.connect('mongodb://localhost/news_website', { 
     useNewUrlParser: true, 
@@ -18,6 +19,8 @@ mongoose.connect('mongodb://localhost/news_website', {
     useCreateIndex:true
 });
 
+// seedDB.del();
+// seedDB.add();
 // setInterval(refresh,1000 * 60 * 60);
 
 app.set('view engine','ejs');
@@ -37,11 +40,14 @@ app.get('/latest',function(req,res){
         var data = JSON.parse(body);
         weather.setCity(data.city);
         weather.getAllWeather(function(err, data){
+            obj = {};
+            obj.main = data.main;
+            obj.description = data.weather[0].description;
             News.find({}).limit(16).exec(function(err,articles){
                 if(err){
                     console.log(err);
                 }else{
-                    res.render('latest',{weather:data.main, articles:articles});
+                    res.render('latest',{weather:obj, articles:articles});
                 }
             });
         });
@@ -52,6 +58,7 @@ app.get('/latest',function(req,res){
 app.use('/business',businessRoutes);
 app.use('/sports',sportsRoutes);
 app.use('/technology',techRoutes);
+app.use('/health',healthRoutes);
 
 app.listen(5000,function(){
     
