@@ -1,14 +1,31 @@
 var express = require('express'),
     router = express.Router(),
     middleWare = require('../middleware/index'),
+    User = require('../models/user'),
     News = require('../models/news');
 
 router.get('/',middleWare.isLoggedIn,function(req,res){
-    News.find({$or : [{category:'technology'},{category:'science'}]}).exec(function(err,articles){
+    News.find({category:'technology'}).exec(function(err,articles){
         if(err){
             console.log(err);
+            res.redirect('back');
         }else{
-            res.render('show',{articles:shuffle(articles)});
+            User.findById(req.user._id,function(err,user){
+                if(err){
+                    console.log(err);
+                    res.redirect('back');
+                }
+                articles.forEach(function(article){
+                    article.isFav = false;
+                    user.favourites.forEach(function(post){
+                        if(article._id.equals(post._id)){
+                            article.isFav = true;
+                        }
+                    });
+                    
+                });
+                res.render('show',{articles:articles});
+            });
         }
     });
 });

@@ -1,3 +1,8 @@
+html ,body{
+    position: relative;
+    min-height: 100%;
+}
+
 .embed-responsive .card-img-top {
     object-fit: fill;
 }
@@ -56,6 +61,22 @@ i{
     height: 100%;
 }
 
+.heart-icon{
+    color: red; 
+    font-size:25px;
+}
+
+#footer-section{
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-icons{
+    color: black;
+}
+
 @media screen and (min-width: 768px) {
     #embed-container{
         height: 300px;
@@ -70,6 +91,6 @@ i{
 
 @media screen and (min-width: 567px){
     #footer-section{
-        height:5em;
+        height:4em;
     }
 }

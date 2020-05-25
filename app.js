@@ -5,6 +5,7 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local'),
     User = require('./models/user'),
+    methodOverride = require('method-override'),
     flash = require('connect-flash'),
     app = express();
 
@@ -12,6 +13,7 @@ var businessRoutes = require('./routes/business'),
     sportsRoutes = require('./routes/sports'),
     techRoutes = require('./routes/technology'),
     healthRoutes = require('./routes/health'),
+    userRoutes = require('./routes/user'),
     indexRoutes = require('./routes/index');
 
 mongoose.connect('mongodb://localhost/news_website', { 
@@ -28,6 +30,7 @@ mongoose.connect('mongodb://localhost/news_website', {
 app.set('view engine','ejs');
 app.use(express.static(__dirname + '/static'));
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
 app.use(flash());
 
 app.use(require('express-session')({
@@ -53,7 +56,8 @@ app.use('/business',businessRoutes);
 app.use('/sports',sportsRoutes);
 app.use('/technology',techRoutes);
 app.use('/health',healthRoutes);
-app.use('/',indexRoutes)
+app.use('/',indexRoutes);
+app.use('/',userRoutes);
 
 app.listen(5000,function(){
     
