@@ -8,6 +8,7 @@ var express = require('express'),
     methodOverride = require('method-override'),
     flash = require('connect-flash'),
     dotenv = require('dotenv'),
+    cron = require('cron'),
     app = express();
    
 dotenv.config();
@@ -26,8 +27,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', 
     useCreateIndex:true
 });
 
+const job = cron.job('0 0/6 * * *',seedDB.add);
+console.log(job.nextDates(5).map(date => date.toString()))
+job.start();
+
 // seedDB.del();
-seedDB.add();   
+// seedDB.add();   
 // setInterval(refresh,1000 * 60 * 60);
 
 app.set('view engine','ejs');
