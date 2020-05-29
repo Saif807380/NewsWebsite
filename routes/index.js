@@ -8,21 +8,21 @@ var weather = require('openweather-apis'),
 
 weather.setLang('en');
 weather.setUnits('metric');
-weather.setAPPID("67ff1f98098d181b8fa98a0d79da18e4");
+weather.setAPPID(process.env.WEATHER_API_KEY);
 
 router.get('/',function(req,res){
     res.render('landing');
 })
 
 router.get('/latest',middleWare.isLoggedIn,function(req,res){
-    request("https://ipinfo.io?token=9d34b9ef3cc10f",function(err,response,body){
+    request("https://ipinfo.io?token=" + process.env.IP_TOKEN,function(err,response,body){
         var data = JSON.parse(body);
         weather.setCity(data.city);
         weather.getAllWeather(function(err, data){
             obj = {};
             obj.main = data.main;
             obj.description = data.weather[0].description;
-            News.find({}).limit(16).exec(function(err,articles){
+            News.find({}).exec(function(err,articles){
                 if(err){
                     console.log(err);
                     res.redirect('back');
@@ -40,7 +40,8 @@ router.get('/latest',middleWare.isLoggedIn,function(req,res){
                                 }
                             });
                         });
-                        res.render('latest',{weather:obj, articles:articles});
+                        shuffle(articles);
+                        res.render('latest',{weather:obj, articles:articles.slice(1,16),header:articles[0]});
                     });
                 }
             });
@@ -48,5 +49,23 @@ router.get('/latest',middleWare.isLoggedIn,function(req,res){
     });
 });
 
+function shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+  
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+  
+    return array;
+  }
 
 module.exports = router;

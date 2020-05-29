@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-md navbar-light">
             <a class="navbar-brand" href="/">Some cool name</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -18,33 +18,33 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav ml-auto">
                 <% if(currentUser){ %> 
-                  <li class="nav-item ">
-                  <a class="nav-link text-white" href="/latest">Latest</a>
+                  <li class="nav-item">
+                  <a class="nav-link text-dark" href="/latest">Latest</a>
                   </li>
                   <li class="nav-item">
-                  <a class="nav-link text-white" href="/business">Business</a>
+                  <a class="nav-link text-dark" href="/business">Business</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="/technology">Technology</a>
+                      <a class="nav-link text-dark" href="/technology">Technology</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="/health">Health</a>
+                      <a class="nav-link text-dark" href="/health">Health</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="/sports">Sports</a>
+                      <a class="nav-link text-dark" href="/sports">Sports</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link text-white" href="/profile">Profile</a>
+                    <a class="nav-link text-dark" href="/profile"><span><i class="fa fa-user-circle text-dark" style="font-size: 22px;"></i></span></a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="/logout">Logout</a>
+                      <a class="nav-link text-dark" href="/logout"><span><i class="fa fa-sign-out text-dark" style="font-size: 22px;"></i></span></a>
                   </li>
               <% }else{ %>
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="/login">Login</a>
+                      <a class="nav-link text-dark" href="/login">Login</a>
                   </li>
                   <li class="nav-item">
-                      <a class="nav-link text-white" href="/register">Sign Up</a>
+                      <a class="nav-link text-dark" href="/register">Sign Up</a>
                   </li>
               <% } %> 
               </ul>

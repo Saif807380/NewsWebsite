@@ -7,7 +7,10 @@ var express = require('express'),
     User = require('./models/user'),
     methodOverride = require('method-override'),
     flash = require('connect-flash'),
+    dotenv = require('dotenv'),
     app = express();
+   
+dotenv.config();
 
 var businessRoutes = require('./routes/business'),
     sportsRoutes = require('./routes/sports'),
@@ -24,7 +27,7 @@ mongoose.connect('mongodb://localhost/news_website', {
 });
 
 // seedDB.del();
-// seedDB.add();
+// seedDB.add();    
 // setInterval(refresh,1000 * 60 * 60);
 
 app.set('view engine','ejs');

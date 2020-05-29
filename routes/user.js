@@ -14,10 +14,37 @@ router.get('/profile',middleWare.isLoggedIn,function(req,res){
             articles.forEach(function(article){
                 article.isFav = true;
             })
-            res.render('show',{articles:articles});
+            res.render('profile',{user:user,articles:articles});
         }
     });
 });
+
+router.get('/edit',middleWare.isLoggedIn,function(req,res){
+    User.findById(req.user._id,function(err,user){
+        if(err){
+            console.log(err);
+            res.redirect('back');
+        }else{
+            res.render('edit',{user:user});
+        }
+    });
+});
+
+router.put('/edit',middleWare.isLoggedIn,function(req,res){
+    User.findById(req.user._id,function(err,user){
+        if(err){
+            console.log(err);
+            res.redirect('back');
+        }else{
+            user.username = req.body.username;
+            user.email = req.body.email;
+            user.contact = req.body.contact;
+            user.save();
+            console.log(user);
+            res.redirect('/profile');
+        }
+    });
+})
 
 router.post('/add/:id',middleWare.isLoggedIn,function(req,res){
     User.findById(req.user._id,function(err,user){
@@ -52,10 +79,14 @@ router.get('/register',middleWare.isLoggedOut,function(req,res){
 });
 
 router.post('/register',middleWare.isLoggedOut,function(req,res){
-    User.register(new User({username: req.body.username}),req.body.password,function(err,user){
+    User.register(new User({
+            username: req.body.username,
+            email: req.body.email,
+            contact: req.body.contact
+        }),req.body.password,function(err,user){
         if(err){
             console.log(err);
-            // req.flash('error',err.message);
+            req.flash('error',err.message);
             res.render('register');
         }else{
             passport.authenticate('local')(req,res,function(){

@@ -24,7 +24,7 @@ router.get('/',middleWare.isLoggedIn,function(req,res){
                     });
                     
                 });
-                res.render('show',{articles:articles});
+                res.render('show',{articles:articles.reverse()});
             });
         }
     });

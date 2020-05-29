@@ -5,10 +5,10 @@
         <div class="col-md-3 col-xl-2 d-none d-md-block">
             <div class="card shadow">
                 <ul class="list-group list-group-flush">
-                    <li class="lead list-group-item bg-dark text-white">Current Weather</li>
-                    <li class="list-group-item">Temperature: <%= weather.main.temp %>°C</li>
-                    <li class="list-group-item">Humidity: <%= weather.main.humidity %>%</li>
-                    <li class="list-group-item">Pressure: <%= weather.main.pressure %> hPa</li>
+                    <li class="lead list-group-item  text-dark">Current Weather</li>
+                    <li class="list-group-item"><i class="fa fa-thermometer-three-quarters text-dark"></i> Temperature: <%= weather.main.temp %>°C</li>
+                    <li class="list-group-item"><span class="iconify" data-icon="wi-humidity" data-inline="false"></span> Humidity: <%= weather.main.humidity %>%</li>
+                    <li class="list-group-item"><span class="iconify" data-icon="wi:barometer" data-inline="false"></span> Pressure: <%= weather.main.pressure %> hPa</li>
                     <li class="list-group-item">Description: <%= weather.description %></li>
                 </ul>
             </div>
@@ -19,12 +19,20 @@
                     <div class="card shadow">
                         <div class="embed-responsive" id="embed-container">
                             <img alt="Card image cap" class="card-img-top embed-responsive-item img-fluid" 
-                            src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fblogs-images.forbes.com%2Falejandrocremades%2Ffiles%2F2018%2F12%2Fbusiness-3605367_1920-1200x741.jpg" />
+                            src="<%= header.image_url %>" id="header-img"/>
                          </div>
-                        <div class="card-img-overlay">
-                            <h4 class="text-light">
-                                Hello
-                            </h4>
+                        <div class="card-img-overlay row align-items-end">
+                            <div class="col-lg-10 col-xl-10">
+                                <h4 class="text-light">
+                                    <%= header.title %> 
+                                </h4>
+                                <p class="text-light">
+                                    <%= header.description %> 
+                                </p>
+                            </div>
+                            <div class="col-lg-2">
+                                <a href="<%= header.article_url %> " class="btn btn-outline-light">Read More</a>
+                            </div>
                         </div>
                     </div>
                 </div>

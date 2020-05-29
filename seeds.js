@@ -1,5 +1,7 @@
 const NewsAPI = require('newsapi');
-const newsapi = new NewsAPI('08962c411ff94e7b85fed6959f1ed1e4');
+const dotenv = require('dotenv');
+dotenv.config();
+const newsapi = new NewsAPI(process.env.NEWS_API_KEY);
 var News = require('./models/news');
 
 categories = ['business','entertainment','general','health','science','sports','technology'];

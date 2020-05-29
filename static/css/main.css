@@ -7,6 +7,16 @@ html ,body{
     object-fit: fill;
 }
 
+#embed-container{
+    background: rgba(0,0,0,0.8);
+}
+
+#header-img{
+    position: relative;
+    display:block;
+    opacity: 0.3;
+}
+
 #lead-container{
     height: 25em;
 }
