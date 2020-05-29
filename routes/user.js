@@ -54,7 +54,7 @@ router.post('/add/:id',middleWare.isLoggedIn,function(req,res){
         }else{
             user.favourites.push(req.params.id);
             user.save();
-            res.redirect('back');
+            res.json({ success: true });
         }
     });
 });
@@ -68,7 +68,7 @@ router.delete('/delete/:id',middleWare.isLoggedIn,function(req,res){
         }else{
             user.favourites.splice(user.favourites.indexOf(req.params.id),1);
             user.save();
-            res.redirect('back');
+            res.json({ success: true });
         }
     })
 })

@@ -43,13 +43,9 @@
                                         </div>
                                         <div class="col-3">
                                             <% if(!article.isFav) {%>
-                                                <form class="form-inline" action="/add/<%= article._id %>" method="POST">
-                                                    <button class="btn btn-outline"><i class="fa fa-heart-o heart-icon"></i></button>
-                                                </form>
+                                                <button class="btn btn-outline like-btn"  data-id="<%= article._id %> "><i class="fa fa-heart-o heart-icon"></i></button>
                                             <% }else{ %>
-                                                <form action="/delete/<%= article._id %>?_method=DELETE" method="POST">
-                                                    <button class="btn btn-outline"><i class="fa fa-heart heart-icon"></i></button>
-                                                </form>
+                                                <button class="btn btn-outline unlike-btn" data-id="<%= article._id %> "><i class="fa fa-heart heart-icon"></i></button>
                                             <% } %> 
                                         </div>
                                     </div>

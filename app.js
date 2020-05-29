@@ -19,7 +19,7 @@ var businessRoutes = require('./routes/business'),
     userRoutes = require('./routes/user'),
     indexRoutes = require('./routes/index');
 
-mongoose.connect(process.env.MONGODB_URI, { 
+mongoose.connect('mongodb://localhost/news_website', { 
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useFindAndModify:false,
