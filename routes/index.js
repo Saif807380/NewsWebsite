@@ -40,7 +40,7 @@ router.get('/latest',middleWare.isLoggedIn,function(req,res){
                                 }
                             });
                         });
-                        res.render('latest',{weather:obj, articles:articles.slice(1,16),header:articles[0]});
+                        res.render('latest',{weather:obj, articles:articles.slice(1,16),header:articles[0],title:"GT | Latest"});
                     });
                 }
             });

@@ -28,7 +28,6 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', 
 });
 
 const job = cron.job('0 0/6 * * *',seedDB.add);
-console.log(job.nextDates(5).map(date => date.toString()))
 job.start();
 
 // seedDB.del();

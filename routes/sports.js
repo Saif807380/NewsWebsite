@@ -25,7 +25,7 @@ router.get('/',middleWare.isLoggedIn,function(req,res){
                     });
                     
                 });
-                res.render('show',{articles:articles.reverse()});
+                res.render('show',{articles:articles.reverse(),title:"GT | Sports"});
             });
         }
     });
