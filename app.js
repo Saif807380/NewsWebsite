@@ -19,7 +19,7 @@ var businessRoutes = require('./routes/business'),
     userRoutes = require('./routes/user'),
     indexRoutes = require('./routes/index');
 
-mongoose.connect('mongodb://localhost/news_website', { 
+mongoose.connect(process.env.MONGODB_URI, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useFindAndModify:false,
@@ -27,7 +27,7 @@ mongoose.connect('mongodb://localhost/news_website', {
 });
 
 // seedDB.del();
-// seedDB.add();    
+// seedDB.add();   
 // setInterval(refresh,1000 * 60 * 60);
 
 app.set('view engine','ejs');
