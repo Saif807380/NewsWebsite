@@ -14,7 +14,7 @@ router.get('/profile',middleWare.isLoggedIn,function(req,res){
             articles.forEach(function(article){
                 article.isFav = true;
             })
-            res.render('profile',{user:user,articles:articles});
+            res.render('profile',{user:user,articles:articles.reverse()});
         }
     });
 });

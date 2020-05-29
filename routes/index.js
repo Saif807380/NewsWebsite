@@ -40,7 +40,6 @@ router.get('/latest',middleWare.isLoggedIn,function(req,res){
                                 }
                             });
                         });
-                        shuffle(articles);
                         res.render('latest',{weather:obj, articles:articles.slice(1,16),header:articles[0]});
                     });
                 }
