@@ -62,6 +62,6 @@ app.use('/health',healthRoutes);
 app.use('/',indexRoutes);
 app.use('/',userRoutes);
 
-app.listen(5000,function(){
+app.listen(process.env.PORT,function(){
     
 });
