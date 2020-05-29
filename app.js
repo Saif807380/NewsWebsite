@@ -27,7 +27,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', 
 });
 
 // seedDB.del();
-// seedDB.add();   
+seedDB.add();   
 // setInterval(refresh,1000 * 60 * 60);
 
 app.set('view engine','ejs');
