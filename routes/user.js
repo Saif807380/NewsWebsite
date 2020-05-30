@@ -90,7 +90,7 @@ router.post('/register',middleWare.isLoggedOut,function(req,res){
             res.render('register');
         }else{
             passport.authenticate('local')(req,res,function(){
-                // req.flash('success','Welcome to YelpCamp '+user.username);
+                req.flash('success', 'Welcome '+user.username);
                 res.redirect("/");
             });
         }
@@ -108,6 +108,7 @@ router.post('/login',passport.authenticate('local',{
 
 router.get('/logout',function(req,res){
     req.logout();
+    req.falsh('success', 'Successfully Logged Out');
     res.redirect('/');
 });
 
