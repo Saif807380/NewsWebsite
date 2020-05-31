@@ -27,12 +27,12 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', 
     useCreateIndex:true
 });
 
-const job = cron.job('0 0/6 * * *',seedDB.add);
-job.start();
 
-// seedDB.del();
-// seedDB.add();   
-// setInterval(refresh,1000 * 60 * 60);
+const job = cron.job('0 0/12 * * *',()=>{
+    seedDB.del();
+    seedDB.add();   
+});
+job.start();
 
 app.set('view engine','ejs');
 app.use(express.static(__dirname + '/static'));
