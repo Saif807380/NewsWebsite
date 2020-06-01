@@ -1,17 +1,16 @@
 var mongoose = require('mongoose');
 
 var newsSchema = mongoose.Schema({
-    key: {
-        title:String,
-        content:String,
-    },
     source: String,
     author: String,
     title: {
         type:String,
         unique:false,
     },
-    description: String,
+    description: {
+        type: String,
+        unique:false,
+    },
     article_url: String,
     image_url: String,
     published_at: String,
@@ -22,7 +21,7 @@ var newsSchema = mongoose.Schema({
     category: String
 });
 
-newsSchema.index({title:1,content:1},{unique:true});
+newsSchema.index({title:1,content:1,description:1},{unique:true});
 
 var News = mongoose.model("News",newsSchema);
 

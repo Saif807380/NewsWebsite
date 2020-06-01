@@ -28,11 +28,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', 
 });
 
 
-const job = cron.job('0 0/6 * * *',()=>{
+const job = cron.job('15 20/6 * * *',()=>{
     seedDB.del();
     seedDB.add();   
 });
 job.start();
+
+
 
 app.set('view engine','ejs');
 app.use(express.static(__dirname + '/static'));
