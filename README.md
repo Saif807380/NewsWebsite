@@ -23,3 +23,5 @@ In the project root folder,
 ```bash
 node app.js
 ```
+
+Deployed at https://global-tidings.herokuapp.com/
