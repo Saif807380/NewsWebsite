@@ -28,8 +28,8 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', 
 });
 
 
-const job = cron.job('15 20/6 * * *',()=>{
-    seedDB.del();
+const job = cron.job('20 20/6 * * *',()=>{
+    // seedDB.del();
     seedDB.add();   
 });
 job.start();
