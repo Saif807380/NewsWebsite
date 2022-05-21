@@ -10,7 +10,7 @@ var express = require('express'),
     dotenv = require('dotenv'),
     cron = require('cron'),
     app = express();
-   
+
 dotenv.config();
 
 var businessRoutes = require('./routes/business'),
@@ -20,29 +20,29 @@ var businessRoutes = require('./routes/business'),
     userRoutes = require('./routes/user'),
     indexRoutes = require('./routes/index');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', { 
-    useNewUrlParser: true, 
-    useUnifiedTopology: true, 
-    useFindAndModify:false,
-    useCreateIndex:true
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/news_website', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useCreateIndex: true
 });
 
 
-var job = new cron.CronJob('* */6 * * *',()=>{
-    seedDB.add();
-});
-job.start();
+// var job = new cron.CronJob('* */6 * * *',()=>{
+//     seedDB.add();
+// });
+// job.start();
 
 // seedDB.add();
 
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/static'));
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(flash());
 
 app.use(require('express-session')({
-    secret:"News Website",
+    secret: "News Website",
     resave: false,
     saveUninitialized: false
 }));
@@ -53,20 +53,20 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.use(function(req,res,next){
+app.use(function(req, res, next) {
     res.locals.currentUser = req.user;
     res.locals.error = req.flash('error');
     res.locals.success = req.flash('success');
-    next(); 
+    next();
 });
 
-app.use('/business',businessRoutes);
-app.use('/sports',sportsRoutes);
-app.use('/technology',techRoutes);
-app.use('/health',healthRoutes);
-app.use('/',indexRoutes);
-app.use('/',userRoutes);
+app.use('/business', businessRoutes);
+app.use('/sports', sportsRoutes);
+app.use('/technology', techRoutes);
+app.use('/health', healthRoutes);
+app.use('/', indexRoutes);
+app.use('/', userRoutes);
 
-app.listen(process.env.PORT,function(){
-    
+app.listen(process.env.PORT, function() {
+    console.log(`Server running on port ${process.env.PORT}`);
 });
